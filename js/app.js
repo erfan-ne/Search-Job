@@ -9,8 +9,6 @@ const showResult = () => {
     .then(data =>{
       const wordDetails = data[0]
       resultElem.innerHTML = ""
-
-      console.log(wordDetails);
       
       resultElem.innerHTML =
         `
@@ -26,7 +24,19 @@ const showResult = () => {
         </div>
         <p class="word-meaning">${wordDetails.meanings[0].definitions[0].definition}</p>
         `
+
+      if (wordDetails.phonetics[0].audio){
+        sound.setAttribute("src" , `${wordDetails.phonetics[0].audio}`)
+      } else if (wordDetails.phonetics[1].audio){
+        sound.setAttribute("src" , `${wordDetails.phonetics[1].audio}`)
+      } else if (wordDetails.phonetics[2].audio){
+        sound.setAttribute("src" , `${wordDetails.phonetics[2].audio}`)
+      }
+      
     }
 )}
 
 searchBtn.addEventListener("click" , showResult)
+function playSound() {
+  sound.play()
+}
