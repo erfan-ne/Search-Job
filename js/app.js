@@ -33,10 +33,16 @@ const showResult = () => {
         sound.setAttribute("src" , `${wordDetails.phonetics[2].audio}`)
       }
     })
-    .catch(err => resultElem.innerHTML = `<h4 class="error">This word is not found</h4>`)
+    .catch( () => resultElem.innerHTML = `<h4 class="error">This word is not found</h4>`)
   }
 
-searchBtn.addEventListener("click" , showResult)
-function playSound() {
-  sound.play()
+const searchByEnter = (event) => {
+  if (wordInput.value && event.key === "Enter"){
+    showResult()
+  }
 }
+
+const playSound = () => sound.play()
+
+searchBtn.addEventListener("click" , showResult)
+document.body.addEventListener("keyup" , searchByEnter)
