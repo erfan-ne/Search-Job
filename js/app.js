@@ -33,7 +33,7 @@ const showResult = () => {
         sound.setAttribute("src" , `${wordDetails.phonetics[2].audio}`)
       }
     })
-    // .catch(err => new Error("the word is not found"));
+    .catch(err => resultElem.innerHTML = `<h4 class="error">This word is not found</h4>`)
   }
 
 searchBtn.addEventListener("click" , showResult)
