@@ -32,9 +32,9 @@ const showResult = () => {
       } else if (wordDetails.phonetics[2].audio){
         sound.setAttribute("src" , `${wordDetails.phonetics[2].audio}`)
       }
-      
-    }
-)}
+    })
+    // .catch(err => new Error("the word is not found"));
+  }
 
 searchBtn.addEventListener("click" , showResult)
 function playSound() {
