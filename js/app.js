@@ -138,7 +138,50 @@ const priceRange = document.querySelector(".price-range");
 const searchBtn = document.querySelector("#search-btn");
 
 const filters = {};
-const shownJobs = [...jobs];
+const showJobs = [...jobs];
 
+showJobs.forEach((job) => {
+  jobsContainer.insertAdjacentHTML(
+    "beforeend",
+    `
+    <article class="job-card">
+      <header>
+        <p class="job-title">${job.title}</p>
+        <p class="job-company">تراشه هوشمند نوین</p>
+      </header>
+      <main class="job-content">
+        <div>
+          <span>
+            <i class="fas fa-map-marker-alt"></i>
+          </span>
+          <span>ریموت</span>
+        </div>
+        <div>
+          <span>
+            <!-- Salary Icon -->
+            <i class="fas fa-dollar-sign"></i>
+          </span>
+          <span class="job-salary"> 35,000,000 تومان/ ماهانه </span>
+        </div>
+        <div>
+          <span>
+            <!-- Time icon -->
+            <i class="fas fa-clock"></i>
+          </span>
+          <span class="job-time"> تمام وقت </span>
+        </div>
+      </main>
+      <footer>
+        <p class="work-time-status">تمام وقت</p>
+        <p class="work-time-status">تهران</p>
+      </footer>
+    </article>
+    `
+  );
+});
 
-searchBtn.addEventListener("click" , searchJob)
+const searchJob = () => {
+  //codes
+};
+
+searchBtn.addEventListener("click", searchJob);
