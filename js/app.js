@@ -1,48 +1,144 @@
-const searchBtn = document.querySelector("#search-btn")
-const wordInput = document.querySelector("#inp-word")
-const resultElem = document.querySelector("#result")
-const sound = document.querySelector("#sound")
+const jobs = [
+  {
+    id: 1,
+    title: "استخدام برنامه‌نویس React",
+    company: "تراشه هوشمند نوین",
+    city: "تهران",
+    salary: 35_000_000,
+    isRemote: true,
+  },
+  {
+    id: 2,
+    title: "برنامه‌نویس ReactJs (شیراز)",
+    company: "چادکو | Chadco",
+    city: "شیراز",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 3,
+    title: "برنامه‌نویس ReactJs(قزوین)",
+    company: "فراگستر | Faragostar",
+    city: "قزوین",
+    salary: 31_000_000,
+    isRemote: false,
+  },
+  {
+    id: 4,
+    title: "برنامه‌نویس ReactJs (یزد)",
+    company: "ایرانیان پوشش",
+    city: "یزد",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 5,
+    title: "React Native Developer",
+    company: "پنکو | Panco",
+    city: "تهران",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 6,
+    title: "React Native Developer",
+    company: "پنکو | Panco",
+    city: "تهران",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 7,
+    title: "برنامه‌نویس فرانت اند (Next-JS)",
+    company: "دابز | Dubz",
+    city: "تهران",
+    salary: 4_000_000,
+    isRemote: true,
+  },
+  {
+    id: 8,
+    title: "Senior Full-Stack Developer (Js)",
+    company: "توسعه و فناوری آوید",
+    city: "تهران",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 9,
+    title: "برنامه‌نویس Vue Js) Front-End)",
+    company: "پیشگامان فن‌آوری هوداد",
+    city: "تهران",
+    salary: 32_000_000,
+    isRemote: false,
+  },
+  {
+    id: 10,
+    title: "برنامه‌نویس (Full-Stack(Node JS",
+    company: "تلمیس | Telmis",
+    city: "مشهد",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 11,
+    title: "برنامه‌نویس بک اند (Nest.js-Node js-کرج)",
+    company: "سیزپک | Sizpack",
+    city: "کرج",
+    salary: 28_000_000,
+    isRemote: true,
+  },
+  {
+    id: 12,
+    title: "برنامه‌نویس ارشد Vue js) Front-End-مشهد)",
+    company: "صنایع سنجش انرژی بهینه سازان توس",
+    city: "مشهد",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 13,
+    title: "برنامه‌نویس Javascript",
+    company: "هوشان کاوش برنا",
+    city: "تبریز",
+    salary: 22_000_000,
+    isRemote: false,
+  },
+  {
+    id: 14,
+    title: "برنامه‌نویس React Js",
+    company: "نوآوران بوم گستر امید",
+    city: "تبریز",
+    salary: "توافقی",
+    isRemote: false,
+  },
+  {
+    id: 15,
+    title: "برنامه‌نویس (Full-Stack(Node JS",
+    company: "المو | ELMO",
+    city: "اصفهان",
+    salary: 48_000_000,
+    isRemote: false,
+  },
+  {
+    id: 16,
+    title: "Junior Front-end Developer (React)",
+    company: "سحاب | Sahab",
+    city: "تهران",
+    salary: "توافقی",
+    isRemote: true,
+  },
+];
 
-const showResult = () => {
-  fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordInput.value}`)
-    .then(response => response.json())
-    .then(data =>{
-      const wordDetails = data[0]
-      resultElem.innerHTML = ""
-      
-      resultElem.innerHTML =
-        `
-        <div class="word">
-          <h3>${wordDetails.word}</h3>
-          <button onclick="playSound()">
-            <i class="fas fa-volume-up"></i>
-          </button>
-        </div>
-        <div class="details">
-          <p>${wordDetails.meanings[0].partOfSpeech}</p>
-          <p>${wordDetails.phonetic}</p>
-        </div>
-        <p class="word-meaning">${wordDetails.meanings[0].definitions[0].definition}</p>
-        `
+const jobsContainer = document.querySelector(".jobs-container");
+const workInput = document.querySelector("#work-input");
+const cityInput = document.querySelector("#city-input");
+const remoteOnlyCheckbox = document.querySelector("#remoteOnly-checkbox");
+const priceRangeInput = document.querySelector("#price-range-input");
+const priceRange = document.querySelector(".price-range");
+const searchBtn = document.querySelector("#search-btn");
 
-      if (wordDetails.phonetics[0].audio){
-        sound.setAttribute("src" , `${wordDetails.phonetics[0].audio}`)
-      } else if (wordDetails.phonetics[1].audio){
-        sound.setAttribute("src" , `${wordDetails.phonetics[1].audio}`)
-      } else if (wordDetails.phonetics[2].audio){
-        sound.setAttribute("src" , `${wordDetails.phonetics[2].audio}`)
-      }
-    })
-    .catch( () => resultElem.innerHTML = `<h4 class="error">This word is not found</h4>`)
-  }
+const filters = {};
+const shownJobs = [...jobs];
 
-const searchByEnter = (event) => {
-  if (wordInput.value && event.key === "Enter"){
-    showResult()
-  }
-}
 
-const playSound = () => sound.play()
-
-searchBtn.addEventListener("click" , showResult)
-document.body.addEventListener("keyup" , searchByEnter)
+searchBtn.addEventListener("click" , searchJob)
