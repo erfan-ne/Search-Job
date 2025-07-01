@@ -144,24 +144,24 @@ showJobs.forEach((job) => {
   jobsContainer.insertAdjacentHTML(
     "beforeend",
     `
-    <article class="job-card">
+    <article class="job-card" id=${job.id}>
       <header>
         <p class="job-title">${job.title}</p>
-        <p class="job-company">تراشه هوشمند نوین</p>
+        <p class="job-company">${job.company}</p>
       </header>
       <main class="job-content">
         <div>
           <span>
             <i class="fas fa-map-marker-alt"></i>
           </span>
-          <span>ریموت</span>
+          <span>${job.isRemote ? job.city + "/ ریموت" : job.city}</span>
         </div>
         <div>
           <span>
             <!-- Salary Icon -->
             <i class="fas fa-dollar-sign"></i>
           </span>
-          <span class="job-salary"> 35,000,000 تومان/ ماهانه </span>
+          <span class="job-salary">${job.salary === "توافقی" ? "توافقی" : (+job.salary).toLocaleString() + " تومان/ماهانه"}</span>
         </div>
         <div>
           <span>
@@ -173,7 +173,7 @@ showJobs.forEach((job) => {
       </main>
       <footer>
         <p class="work-time-status">تمام وقت</p>
-        <p class="work-time-status">تهران</p>
+        <p class="work-time-status">${job.city}</p>
       </footer>
     </article>
     `
