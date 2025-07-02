@@ -200,6 +200,11 @@ const searchByCity = () => {
   console.log(cityInput.value);
 }
 
+const remoteOnly = () => {
+  console.log(remoteOnlyCheckbox.checked);
+}
+
+
 
 const searchJob = () => {
   //codes
@@ -208,3 +213,4 @@ const searchJob = () => {
 searchBtn.addEventListener("click", searchJob);
 workInput.addEventListener("input" , searchByWork);
 cityInput.addEventListener("input" , searchByCity);
+remoteOnlyCheckbox.addEventListener("change", remoteOnly)
