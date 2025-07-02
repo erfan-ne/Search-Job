@@ -204,7 +204,10 @@ const remoteOnly = () => {
   console.log(remoteOnlyCheckbox.checked);
 }
 
-
+const priceRangeAct = () => {
+  priceRange.innerHTML= (+priceRangeInput.value).toLocaleString()
+  
+}
 
 const searchJob = () => {
   //codes
@@ -214,3 +217,4 @@ searchBtn.addEventListener("click", searchJob);
 workInput.addEventListener("input" , searchByWork);
 cityInput.addEventListener("input" , searchByCity);
 remoteOnlyCheckbox.addEventListener("change", remoteOnly)
+priceRangeInput.addEventListener("input" , priceRangeAct);
