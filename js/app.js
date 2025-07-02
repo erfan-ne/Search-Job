@@ -141,7 +141,7 @@ const filters = {};
 const showJobs = [...jobs];
 
 const loadPage = () => {
-  if (showJobs.length > 0) {
+  if (showJobs.length) {
     showJobs.forEach((job) => {
       jobsContainer.insertAdjacentHTML(
         "beforeend",
@@ -193,28 +193,34 @@ const loadPage = () => {
 };
 
 const searchByWork = () => {
-  console.log(workInput.value);
+  filters.title = workInput.value.trim()
 }
 
 const searchByCity = () => {
-  console.log(cityInput.value);
+  filters.city = cityInput.value.trim()
 }
 
 const remoteOnly = () => {
-  console.log(remoteOnlyCheckbox.checked);
+  filters.isRemote = remoteOnlyCheckbox.checked
 }
 
 const priceRangeAct = () => {
   priceRange.innerHTML= (+priceRangeInput.value).toLocaleString()
+  filters.salary = +priceRangeInput.value
   
 }
 
 const searchJob = () => {
-  //codes
+  showJobs.forEach( (job) => {
+
+  })
+  
+  
+  
 };
 
 searchBtn.addEventListener("click", searchJob);
-workInput.addEventListener("input" , searchByWork);
-cityInput.addEventListener("input" , searchByCity);
+workInput.addEventListener("change" , searchByWork);
+cityInput.addEventListener("change" , searchByCity);
 remoteOnlyCheckbox.addEventListener("change", remoteOnly)
 priceRangeInput.addEventListener("input" , priceRangeAct);
