@@ -196,6 +196,10 @@ const searchByWork = () => {
   console.log(workInput.value);
 }
 
+const searchByCity = () => {
+  console.log(cityInput.value);
+}
+
 
 const searchJob = () => {
   //codes
@@ -203,3 +207,4 @@ const searchJob = () => {
 
 searchBtn.addEventListener("click", searchJob);
 workInput.addEventListener("input" , searchByWork);
+cityInput.addEventListener("input" , searchByCity);
