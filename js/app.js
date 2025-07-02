@@ -193,7 +193,7 @@ const loadPage = () => {
 };
 
 const searchByWork = () => {
-  filters.title = workInput.value.trim()
+  filters.work = workInput.value.trim()
 }
 
 const searchByCity = () => {
@@ -213,8 +213,8 @@ const priceRangeAct = () => {
 const searchJob = () => {
   showJobs = jobs.filter((job) => {
 
-    const titleMatch = filters.title
-      ? job.title.toLowerCase().includes(filters.title.toLowerCase())
+    const titleMatch = filters.work
+      ? job.title.toLowerCase().includes(filters.work.toLowerCase())
       : true;
 
     const cityMatch = filters.city
@@ -235,7 +235,6 @@ const searchJob = () => {
   jobsContainer.innerHTML = "";
   loadPage();
 };
-
 
 searchBtn.addEventListener("click", searchJob);
 workInput.addEventListener("change" , searchByWork);
