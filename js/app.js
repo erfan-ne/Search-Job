@@ -138,7 +138,7 @@ const priceRange = document.querySelector(".price-range");
 const searchBtn = document.querySelector("#search-btn");
 
 const filters = {};
-const showJobs = [...jobs];
+let showJobs = [...jobs];
 
 const loadPage = () => {
   if (showJobs.length) {
@@ -206,18 +206,36 @@ const remoteOnly = () => {
 
 const priceRangeAct = () => {
   priceRange.innerHTML= (+priceRangeInput.value).toLocaleString()
-  filters.salary = +priceRangeInput.value
+  filters.maxSalary = +priceRangeInput.value
   
 }
 
 const searchJob = () => {
-  showJobs.forEach( (job) => {
+  showJobs = jobs.filter((job) => {
 
-  })
-  
-  
-  
+    const titleMatch = filters.title
+      ? job.title.toLowerCase().includes(filters.title.toLowerCase())
+      : true;
+
+    const cityMatch = filters.city
+      ? job.city.toLowerCase().includes(filters.city.toLowerCase())
+      : true;
+
+    const remoteMatch =
+      filters.isRemote !== undefined ? job.isRemote === filters.isRemote : true;
+
+    const salaryMatch =
+      typeof filters.maxSalary === "number"
+        ? job.salary === "توافقی" || +job.salary <= filters.maxSalary
+        : true;
+
+    return titleMatch && cityMatch && remoteMatch && salaryMatch;
+  });
+
+  jobsContainer.innerHTML = "";
+  loadPage();
 };
+
 
 searchBtn.addEventListener("click", searchJob);
 workInput.addEventListener("change" , searchByWork);
