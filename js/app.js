@@ -140,51 +140,58 @@ const searchBtn = document.querySelector("#search-btn");
 const filters = {};
 const showJobs = [...jobs];
 
-if (showJobs.length>0){
-  showJobs.forEach((job) => {
-    jobsContainer.insertAdjacentHTML(
-      "beforeend",
-      `
-      <article class="job-card" id=${job.id}>
-        <header>
-          <p class="job-title">${job.title}</p>
-          <p class="job-company">${job.company}</p>
-        </header>
-        <main class="job-content">
-          <div>
-            <span>
-              <i class="fas fa-map-marker-alt"></i>
-            </span>
-            <span>${job.isRemote ? job.city + "/ ریموت" : job.city}</span>
-          </div>
-          <div>
-            <span>
-              <!-- Salary Icon -->
-              <i class="fas fa-dollar-sign"></i>
-            </span>
-            <span class="job-salary">${job.salary === "توافقی" ? "توافقی" : (+job.salary).toLocaleString() + " تومان/ماهانه"}</span>
-          </div>
-          <div>
-            <span>
-              <!-- Time icon -->
-              <i class="fas fa-clock"></i>
-            </span>
-            <span class="job-time"> تمام وقت </span>
-          </div>
-        </main>
-        <footer>
-          <p class="work-time-status">تمام وقت</p>
-          <p class="work-time-status">${job.city}</p>
-        </footer>
-      </article>
-      `
-    );
-  });
-} else {
-  jobsContainer.innerHTML = `<p class="font-Sans-Bold text-zinc-800 text-base">
-            هیچ شغلی پیدا نشد :(
-          </p>`
-}
+const loadPage = () => {
+  if (showJobs.length > 0) {
+    showJobs.forEach((job) => {
+      jobsContainer.insertAdjacentHTML(
+        "beforeend",
+        `
+        <article class="job-card" id=${job.id}>
+          <header>
+            <p class="job-title">${job.title}</p>
+            <p class="job-company">${job.company}</p>
+          </header>
+          <main class="job-content">
+            <div>
+              <span>
+                <i class="fas fa-map-marker-alt"></i>
+              </span>
+              <span>${job.isRemote ? job.city + "/ ریموت" : job.city}</span>
+            </div>
+            <div>
+              <span>
+                <!-- Salary Icon -->
+                <i class="fas fa-dollar-sign"></i>
+              </span>
+              <span class="job-salary">${
+                job.salary === "توافقی"
+                  ? "توافقی"
+                  : (+job.salary).toLocaleString() + " تومان/ماهانه"
+              }</span>
+            </div>
+            <div>
+              <span>
+                <!-- Time icon -->
+                <i class="fas fa-clock"></i>
+              </span>
+              <span class="job-time"> تمام وقت </span>
+            </div>
+          </main>
+          <footer>
+            <p class="work-time-status">تمام وقت</p>
+            <p class="work-time-status">${job.city}</p>
+          </footer>
+        </article>
+        `
+      );
+    });
+  } else {
+    jobsContainer.innerHTML = `<p class="font-Sans-Bold text-zinc-800 text-base">
+              هیچ شغلی پیدا نشد :(
+            </p>`;
+  }
+};
+
 
 
 const searchJob = () => {
