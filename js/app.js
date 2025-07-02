@@ -192,6 +192,9 @@ const loadPage = () => {
   }
 };
 
+const searchByWork = () => {
+  console.log(workInput.value);
+}
 
 
 const searchJob = () => {
@@ -199,3 +202,4 @@ const searchJob = () => {
 };
 
 searchBtn.addEventListener("click", searchJob);
+workInput.addEventListener("input" , searchByWork);
